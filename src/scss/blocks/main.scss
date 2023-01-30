@@ -1,10 +1,27 @@
+.points-container{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    font-size: 1.5rem;
+    padding-left: 200px;
+    padding-right: 200px;
+    background-color: rgb(39, 39, 39);
+    text-transform: uppercase;
+
+}
+
+
 .cards-board {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    margin: 1rem;
-    margin-left: 100px;
-    margin-right: 100px;
+    grid-template-columns: repeat(auto-fit, minmax( 125px, 1fr));
+    margin: auto;
+    margin-top: 2rem;
+    padding-left: 100px;
+    padding-right: 100px;
+    max-width: 900px;
     gap: 1rem;
 }
 
@@ -44,7 +61,7 @@
         background-color: white;
         width: 55px;
         height: 55px;
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         border-radius: 50%;
         border: 4px solid black;
         transform: translate(-50%, -50%);
