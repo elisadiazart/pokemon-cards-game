@@ -1,15 +1,29 @@
 .points-container{
     display: flex;
-    margin: auto;
     justify-content: space-between;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    font-size: 1.5rem;
-    padding-left: 200px;
-    padding-right: 200px;
+    font-size: 1rem;
+    padding-left: 20%;
+    padding-right: 20%;
     background-color: rgb(39, 39, 39);
     text-transform: uppercase;
+    align-items: center;
 
+}
+
+.total-points{
+    display: flex;
+    align-items: center;
+}
+
+.points-c{
+    display: flex;
+}
+
+.icon{
+    margin-right: 1rem;
+    width: 30px;
 }
 
 
@@ -39,6 +53,11 @@
     transform-style: preserve-3d;
     transition: transform 0.5s ease-in-out;
     cursor: pointer;
+
+    &__front,
+    &__back{
+        pointer-events: none;
+    }
 
     &__back{
     height: 100%;

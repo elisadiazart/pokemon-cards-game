@@ -3,6 +3,8 @@ import '../scss/styles.scss';
 import { sayHello } from './demo.js';
 
 const gameBoard = document.getElementById('game-board');
+const pointsElement = document.getElementById('points');
+const failsElement = document.getElementById('fails');
 let firstCard;
 let secondCard;
 
@@ -52,9 +54,6 @@ const allNumbers = createArray();
 //DESORDENAR EL ARRAY REPETIDO//
 const allNumbersShuffle = shuffle(allNumbers);
 
-console.log(allNumbers);
-console.log(allNumbersShuffle);
-
 //RECORRES EL ARRAY PARA QUE CADA NUMERO SEA UNA CARTA, SE PASA EL DATO DEL NUMERO DEL ARRAY PARA HACER LA CARTA//
 allNumbersShuffle.forEach(card => createCard(card));
 
@@ -78,12 +77,13 @@ const timeoutSecond = setTimeout(() => {
   clearTimeout(timeoutSecond);
 }, 2500);
 
-const showCards = e => {
+const showCards = cardSelected => {
+  if (cardSelected.classList.contains('card--show')) return;
   if (!firstCard) {
-    firstCard = e.target.parentElement;
+    firstCard = cardSelected;
     firstCard.classList.add('card--show');
   } else if (!secondCard) {
-    secondCard = e.target.parentElement;
+    secondCard = cardSelected;
     secondCard.classList.add('card--show');
     secondCard.addEventListener('transitionend', () => checkCards(), {
       once: true
@@ -91,19 +91,30 @@ const showCards = e => {
   }
 };
 
+let counter = 0;
+let fails = 0;
+
 const checkCards = () => {
   if (firstCard && secondCard) {
     if (firstCard.dataset.number !== secondCard.dataset.number) {
       secondCard.classList.remove('card--show');
       firstCard.classList.remove('card--show');
+      fails++;
+    } else {
+      counter++;
     }
     firstCard = '';
     secondCard = '';
   }
+  printPoints();
+};
+
+const printPoints = () => {
+  pointsElement.textContent = `Total Points: ${counter}`;
+  failsElement.textContent = `Fails: ${fails}`;
 };
 
 gameBoard.addEventListener('click', e => {
-  console.log(e.target)
-  if(e.target.classList.contains('cards-board')) return
-  showCards(e);
+  if (!e.target.classList.contains('card')) return;
+  showCards(e.target);
 });
